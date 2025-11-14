@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Adventure</title>
+    <!-- Cardot Font -->
+    <link href="https://fonts.cdnfonts.com/css/cardot" rel="stylesheet" />
+  </head>
+  <body>
+    <canvas id="matrix-bg"></canvas>
+    <div id="landing-page">
+      <div class="landing-container">
+        <h1 class="title">
+          I'm <span id="typed-text"></span><span id="cursor">|</span>
+        </h1>
+        <button id="start-adventure" class="btn-primary">
+          Start Adventure
+        </button>
+        <a href="/RESUME_HERE.pdf" target="_blank" class="resume-link"
+          >boring resume</a
+        >
+      </div>
+    </div>
+    <div id="game-container" style="display: none"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

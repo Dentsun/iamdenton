@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cardot', 'Courier New', monospace;
+  background: #000000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Matrix rain background */
+#matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#landing-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-container {
+  text-align: center;
+  color: #00ff00;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-family: 'Cardot', 'Courier New', monospace;
+  font-size: 3.5rem;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  letter-spacing: 2px;
+  color: #00ff00;
+}
+
+#typed-text {
+  color: #00ff00;
+}
+
+#cursor {
+  color: #00ff00;
+  animation: blink 0.8s infinite;
+  font-weight: normal;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.btn-primary {
+  background: #000000;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 1.2rem 3rem;
+  font-size: 1.5rem;
+  font-family: 'Cardot', 'Courier New', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.btn-primary:hover {
+  background: #00ff00;
+  color: #000000;
+  box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+  transform: translateY(-3px);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.resume-link {
+  color: #006600;
+  font-family: 'Cardot', 'Courier New', monospace;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+  text-shadow: 0 0 5px #006600;
+}
+
+.resume-link:hover {
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  text-decoration: underline;
+}
+
+#game-container {
+  width: 100%;
+  height: 100vh;
+}
+
+#game-container canvas {
+  display: block;
+  margin: 0 auto;
+}
