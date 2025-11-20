@@ -24,8 +24,31 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
   const { windows, openWindow } = useWindow();
 
   const openResume = () => {
-     // Use the public path - Vite will handle it correctly
-     window.open(`${import.meta.env.BASE_URL}Denton_Sun_Resume.pdf`, '_blank');
+     // Smart URL detection for GitHub Pages:
+     // - Local dev: uses relative path
+     // - Production: uses full GitHub Pages URL (works for both user and project pages)
+     const isProduction = import.meta.env.PROD;
+     const hostname = window.location.hostname;
+
+     let pdfUrl: string;
+
+     if (isProduction && hostname.includes('github.io')) {
+       // On GitHub Pages - use full URL
+       // This will work whether deployed to dentsun.github.io or dentsun.github.io/iamdenton
+       const currentPath = window.location.pathname;
+       const isProjectPage = currentPath.includes('/iamdenton');
+
+       if (isProjectPage) {
+         pdfUrl = 'https://dentsun.github.io/iamdenton/Denton_Sun_Resume.pdf';
+       } else {
+         pdfUrl = 'https://dentsun.github.io/Denton_Sun_Resume.pdf';
+       }
+     } else {
+       // Local development or other hosting - use relative path
+       pdfUrl = `${import.meta.env.BASE_URL}Denton_Sun_Resume.pdf`;
+     }
+
+     window.open(pdfUrl, '_blank');
   };
 
   return (
