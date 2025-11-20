@@ -1,20 +1,5 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# iamdenton
+I'm Denton, a software engineer who's worked on everything from offline CBDC payments to fintech modeling tools. Always down to chat about tech, projects, or honestly whatever, feel free to reach out.
 
-# Run and deploy your AI Studio app
+This is my portfolio disguised as a retro Windows XP-style operating system. Built with React and TypeScript, it's got working windows you can drag around, a couple games to kill time, and all my work stuff organized into desktop apps. It's probably more fun than a regular resume site.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/drive/1qVBDrhY5L2zMREBoV8ZrWlDeXAcZ_SVb
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
