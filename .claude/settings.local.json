@@ -1,10 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm create:*)",
-      "Bash(npm install:*)",
-      "Bash(npm run dev:*)",
-      "Bash(find:*)"
+      "Bash(test:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(find:*)",
+      "Bash(dir:*)",
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(npm run build:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)",
+      "Bash(tree:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill /PID 31416 /F)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
