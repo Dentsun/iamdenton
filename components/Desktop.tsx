@@ -13,6 +13,7 @@ import { FaHardHat } from 'react-icons/fa'; // Using FontAwesome for solid fill
 import WorkExperience from './apps/WorkExperience';
 import Projects from './apps/Projects';
 import Skills from './apps/Skills';
+import PDFViewer from './apps/PDFViewer';
 import Minesweeper from './games/Minesweeper';
 import Snake from './games/Snake';
 
@@ -23,7 +24,7 @@ interface DesktopProps {
 const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
   const { windows, openWindow } = useWindow();
 
-  const openResume = () => {
+  const getPDFUrl = () => {
      // Smart URL detection - automatically works for:
      // - Local dev (localhost)
      // - GitHub Pages user page (dentsun.github.io)
@@ -31,24 +32,20 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
      const hostname = window.location.hostname;
      const pathname = window.location.pathname;
 
-     let pdfUrl: string;
-
      // Check if we're on GitHub Pages
      if (hostname.includes('github.io')) {
        // Detect if project page or user page
        if (pathname.includes('/iamdenton')) {
          // Project page
-         pdfUrl = 'https://dentsun.github.io/iamdenton/Denton_Sun_Resume.pdf';
+         return 'https://dentsun.github.io/iamdenton/Denton_Sun_Resume.pdf';
        } else {
          // User page
-         pdfUrl = 'https://dentsun.github.io/Denton_Sun_Resume.pdf';
+         return 'https://dentsun.github.io/Denton_Sun_Resume.pdf';
        }
      } else {
        // Local development or other hosting - use relative path
-       pdfUrl = '/Denton_Sun_Resume.pdf';
+       return '/Denton_Sun_Resume.pdf';
      }
-
-     window.open(pdfUrl, '_blank');
   };
 
   return (
@@ -153,7 +150,7 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
           <DesktopIcon
             title="Resume.pdf"
             icon={<FileText className="text-red-500 fill-white drop-shadow-md" size={54} />}
-            onClick={openResume}
+            onClick={() => openWindow('resume', 'Denton Sun - Resume', <PDFViewer pdfUrl={getPDFUrl()} fileName="Denton_Sun_Resume.pdf" />, undefined, { width: 900, height: 700 })}
             initialPosition={{ x: 160, y: 0 }}
           />
         </div>
