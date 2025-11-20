@@ -24,28 +24,28 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
   const { windows, openWindow } = useWindow();
 
   const openResume = () => {
-     // Smart URL detection for GitHub Pages:
-     // - Local dev: uses relative path
-     // - Production: uses full GitHub Pages URL (works for both user and project pages)
-     const isProduction = import.meta.env.PROD;
+     // Smart URL detection - automatically works for:
+     // - Local dev (localhost)
+     // - GitHub Pages user page (dentsun.github.io)
+     // - GitHub Pages project page (dentsun.github.io/iamdenton)
      const hostname = window.location.hostname;
+     const pathname = window.location.pathname;
 
      let pdfUrl: string;
 
-     if (isProduction && hostname.includes('github.io')) {
-       // On GitHub Pages - use full URL
-       // This will work whether deployed to dentsun.github.io or dentsun.github.io/iamdenton
-       const currentPath = window.location.pathname;
-       const isProjectPage = currentPath.includes('/iamdenton');
-
-       if (isProjectPage) {
+     // Check if we're on GitHub Pages
+     if (hostname.includes('github.io')) {
+       // Detect if project page or user page
+       if (pathname.includes('/iamdenton')) {
+         // Project page
          pdfUrl = 'https://dentsun.github.io/iamdenton/Denton_Sun_Resume.pdf';
        } else {
+         // User page
          pdfUrl = 'https://dentsun.github.io/Denton_Sun_Resume.pdf';
        }
      } else {
        // Local development or other hosting - use relative path
-       pdfUrl = `${import.meta.env.BASE_URL}Denton_Sun_Resume.pdf`;
+       pdfUrl = '/Denton_Sun_Resume.pdf';
      }
 
      window.open(pdfUrl, '_blank');

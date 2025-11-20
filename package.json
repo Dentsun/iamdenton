@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:bundle": "esbuild index.tsx --bundle --outfile=index.js --format=esm --jsx=automatic --platform=browser --external:react --external:react-dom --external:react/jsx-runtime --external:react-rnd --external:lucide-react --external:react-icons/fa --define:import.meta.env.PROD=false",
-    "build:prod": "esbuild index.tsx --bundle --outfile=index.js --format=esm --jsx=automatic --platform=browser --external:react --external:react-dom --external:react/jsx-runtime --external:react-rnd --external:lucide-react --external:react-icons/fa --define:import.meta.env.PROD=true --define:import.meta.env.BASE_URL='\"\"'",
+    "build:bundle": "esbuild index.tsx --bundle --outfile=index.js --format=esm --jsx=automatic --platform=browser --external:react --external:react-dom --external:react/jsx-runtime --external:react-rnd --external:lucide-react --external:react-icons/fa",
     "preview": "vite preview",
-    "deploy:user": "npm run build:prod && gh-pages -d . -b main -r https://github.com/Dentsun/dentsun.github.io.git",
-    "deploy:project": "npm run build:prod && gh-pages -d . -b gh-pages"
+    "deploy:user": "npm run build:bundle && gh-pages -d . -b main -r https://github.com/Dentsun/dentsun.github.io.git",
+    "deploy:project": "npm run build:bundle && gh-pages -d . -b gh-pages"
   },
   "dependencies": {
     "react": "^19.2.0",
