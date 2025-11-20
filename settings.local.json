@@ -17,6 +17,7 @@
       "Bash(findstr:*)",
       "Bash(taskkill /PID 31416 /F)"
     ],
+    "includeCoAuthoredBy": false,
     "deny": [],
     "ask": []
   }
