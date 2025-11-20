@@ -7,7 +7,7 @@ interface TaskbarProps {
 }
 
 const Taskbar: React.FC<TaskbarProps> = ({ onLogout }) => {
-  const { windows, activeWindowId, focusWindow, minimizeWindow } = useWindow();
+  const { windows, activeWindowId, focusWindow, minimizeWindow, openWindow } = useWindow();
   const [time, setTime] = useState(new Date());
   const [isStartOpen, setIsStartOpen] = useState(false);
   const startMenuRef = useRef<HTMLDivElement>(null);
@@ -38,9 +38,17 @@ const Taskbar: React.FC<TaskbarProps> = ({ onLogout }) => {
   };
 
   const handleWindowClick = (id: string) => {
-    if (activeWindowId === id) {
+    const window = windows.find(w => w.id === id);
+    if (!window) return;
+
+    // If window is minimized, restore it using openWindow (which handles restoration)
+    if (window.isMinimized) {
+      openWindow(id, window.title, window.content, window.icon, window.defaultSize);
+    } else if (activeWindowId === id) {
+      // If already active and not minimized, minimize it
       minimizeWindow(id);
     } else {
+      // Otherwise just focus it
       focusWindow(id);
     }
   };

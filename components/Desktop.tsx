@@ -24,7 +24,8 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
   const { windows, openWindow } = useWindow();
 
   const openResume = () => {
-     window.open('/Denton_Sun_Resume.pdf', '_blank');
+     // Use the public path - Vite will handle it correctly
+     window.open(`${import.meta.env.BASE_URL}Denton_Sun_Resume.pdf`, '_blank');
   };
 
   return (
@@ -54,76 +55,85 @@ const Desktop: React.FC<DesktopProps> = ({ onLogout }) => {
         <div className="absolute bottom-[-10%] left-[-10%] w-[150%] h-[45%] bg-gradient-to-t from-[#6B9D28] to-[#85C134] rounded-[60%_100%_0_0] rotate-1"></div>
       </div>
 
-      {/* Icons Grid */}
-      <div className="absolute top-0 left-0 p-6 flex flex-col flex-wrap content-start gap-6 h-[calc(100%-40px)] z-0 pointer-events-auto">
-        <DesktopIcon 
-          title="Work Experience" 
-          icon={<Briefcase className="text-yellow-500 fill-yellow-100 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('work', 'Work Experience', <WorkExperience />, undefined, { width: 700, height: 550 })} 
-        />
-        <DesktopIcon 
-          title="Projects" 
-          icon={<FaHardHat className="text-orange-500 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('projects', 'Projects', <Projects />, undefined, { width: 800, height: 600 })} 
-        />
-        <DesktopIcon 
-          title="Skills" 
-          icon={<Cpu className="text-gray-300 fill-gray-600 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('skills', 'Technical Arsenal', <Skills />, undefined, { width: 650, height: 500 })} 
-        />
-        <DesktopIcon 
-          title="Education" 
-          icon={<GraduationCap className="text-blue-300 fill-blue-800 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('education', 'Education', (
-            <div className="p-6 bg-white h-full text-gray-900">
-                <h2 className="text-2xl font-bold mb-4">Education</h2>
-                <div className="border-l-4 border-blue-800 pl-4">
-                    <h3 className="text-xl font-bold">University of British Columbia</h3>
-                    <p className="font-mono text-sm">BSc Computer Science | May 2024</p>
-                    <p className="mt-2 text-gray-700">Exchange Term: NTU Singapore</p>
-                    <p className="text-sm text-gray-500 mt-4">Relevant Coursework:</p>
-                    <ul className="list-disc list-inside text-sm">
-                        <li>AI & Machine Learning</li>
-                        <li>Distributed Systems</li>
-                        <li>Cloud Computing</li>
-                    </ul>
-                </div>
-            </div>
-          ), undefined, { width: 500, height: 400 })} 
-        />
-        <DesktopIcon 
-          title="Games" 
-          icon={<Gamepad2 className="text-purple-400 fill-purple-900 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('games-menu', 'Game Center', (
-              <div className="flex flex-col gap-4 p-8 items-center justify-center h-full bg-[#008080]">
-                  <button onClick={() => openWindow('minesweeper', 'Minesweeper', <Minesweeper />, undefined, {width: 340, height: 420})} className="px-6 py-3 bg-[#c0c0c0] retro-border font-bold active:retro-border-inset w-full hover:bg-white text-black">
-                      Play Minesweeper
-                  </button>
-                  <button onClick={() => openWindow('snake', 'Snake', <Snake />, undefined, {width: 450, height: 550})} className="px-6 py-3 bg-[#c0c0c0] retro-border font-bold active:retro-border-inset w-full hover:bg-white text-black">
-                      Play Snake
-                  </button>
+      {/* Icons Grid - Now with absolute positioning for drag support */}
+      <div className="absolute top-0 left-0 p-6 h-[calc(100%-40px)] z-0 pointer-events-none">
+        <div className="relative w-full h-full pointer-events-auto">
+          <DesktopIcon
+            title="Work Experience"
+            icon={<Briefcase className="text-yellow-500 fill-yellow-100 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('work', 'Work Experience', <WorkExperience />, undefined, { width: 700, height: 550 })}
+            initialPosition={{ x: 0, y: 0 }}
+          />
+          <DesktopIcon
+            title="Projects"
+            icon={<FaHardHat className="text-orange-500 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('projects', 'Projects', <Projects />, undefined, { width: 800, height: 600 })}
+            initialPosition={{ x: 0, y: 120 }}
+          />
+          <DesktopIcon
+            title="Skills"
+            icon={<Cpu className="text-gray-300 fill-gray-600 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('skills', 'Technical Arsenal', <Skills />, undefined, { width: 650, height: 500 })}
+            initialPosition={{ x: 0, y: 240 }}
+          />
+          <DesktopIcon
+            title="Education"
+            icon={<GraduationCap className="text-blue-300 fill-blue-800 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('education', 'Education', (
+              <div className="p-6 bg-white h-full text-gray-900">
+                  <h2 className="text-2xl font-bold mb-4">Education</h2>
+                  <div className="border-l-4 border-blue-800 pl-4">
+                      <h3 className="text-xl font-bold">University of British Columbia</h3>
+                      <p className="font-mono text-sm">BSc Computer Science | May 2024</p>
+                      <p className="mt-2 text-gray-700">Exchange Term: NTU Singapore</p>
+                      <p className="text-sm text-gray-500 mt-4">Relevant Coursework:</p>
+                      <ul className="list-disc list-inside text-sm">
+                          <li>AI & Machine Learning</li>
+                          <li>Distributed Systems</li>
+                          <li>Cloud Computing</li>
+                      </ul>
+                  </div>
               </div>
-          ), undefined, { width: 300, height: 300 })} 
-        />
-        <DesktopIcon 
-          title="Contact" 
-          icon={<Mail className="text-blue-200 fill-blue-600 drop-shadow-md" size={54} />} 
-          onClick={() => openWindow('contact', 'Contact Info', (
-            <div className="flex flex-col items-center justify-center h-full bg-[#c0c0c0] p-6 text-center text-gray-900">
-                <div className="bg-white p-8 retro-border shadow-lg max-w-sm">
-                    <h2 className="text-2xl font-bold mb-6">Denton Sun</h2>
-                    <a href="mailto:dentonjdsun@gmail.com" className="block text-blue-600 underline mb-2 hover:text-blue-800">dentonjdsun@gmail.com</a>
-                    <a href="https://linkedin.com/in/dentonjdsun/" target="_blank" rel="noopener noreferrer" className="block text-blue-600 underline hover:text-blue-800">LinkedIn Profile</a>
-                    <p className="mt-6 text-gray-500 text-sm">Vancouver, British Columbia</p>
+            ), undefined, { width: 500, height: 400 })}
+            initialPosition={{ x: 0, y: 360 }}
+          />
+          <DesktopIcon
+            title="Games"
+            icon={<Gamepad2 className="text-purple-400 fill-purple-900 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('games-menu', 'Game Center', (
+                <div className="flex flex-col gap-4 p-8 items-center justify-center h-full bg-[#008080]">
+                    <button onClick={() => openWindow('minesweeper', 'Minesweeper', <Minesweeper />, undefined, {width: 340, height: 420})} className="px-6 py-3 bg-[#c0c0c0] retro-border font-bold active:retro-border-inset w-full hover:bg-white text-black">
+                        Play Minesweeper
+                    </button>
+                    <button onClick={() => openWindow('snake', 'Snake', <Snake />, undefined, {width: 450, height: 550})} className="px-6 py-3 bg-[#c0c0c0] retro-border font-bold active:retro-border-inset w-full hover:bg-white text-black">
+                        Play Snake
+                    </button>
                 </div>
-            </div>
-          ), undefined, { width: 400, height: 400 })} 
-        />
-        <DesktopIcon 
-          title="Resume.pdf" 
-          icon={<FileText className="text-red-500 fill-white drop-shadow-md" size={54} />} 
-          onClick={openResume} 
-        />
+            ), undefined, { width: 300, height: 300 })}
+            initialPosition={{ x: 0, y: 480 }}
+          />
+          <DesktopIcon
+            title="Contact"
+            icon={<Mail className="text-blue-200 fill-blue-600 drop-shadow-md" size={54} />}
+            onClick={() => openWindow('contact', 'Contact Info', (
+              <div className="flex flex-col items-center justify-center h-full bg-[#c0c0c0] p-6 text-center text-gray-900">
+                  <div className="bg-white p-8 retro-border shadow-lg max-w-sm">
+                      <h2 className="text-2xl font-bold mb-6">Denton Sun</h2>
+                      <a href="mailto:dentonjdsun@gmail.com" className="block text-blue-600 underline mb-2 hover:text-blue-800">dentonjdsun@gmail.com</a>
+                      <a href="https://linkedin.com/in/dentonjdsun/" target="_blank" rel="noopener noreferrer" className="block text-blue-600 underline hover:text-blue-800">LinkedIn Profile</a>
+                      <p className="mt-6 text-gray-500 text-sm">Vancouver, British Columbia</p>
+                  </div>
+              </div>
+            ), undefined, { width: 400, height: 400 })}
+            initialPosition={{ x: 0, y: 600 }}
+          />
+          <DesktopIcon
+            title="Resume.pdf"
+            icon={<FileText className="text-red-500 fill-white drop-shadow-md" size={54} />}
+            onClick={openResume}
+            initialPosition={{ x: 160, y: 0 }}
+          />
+        </div>
       </div>
 
       {/* Widgets Area */}
